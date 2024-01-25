@@ -1,4 +1,4 @@
-export const currencyFormatter = new Intl.NumberFormat('en-NG', { 
+export const currencyFormatter = new Intl.NumberFormat('en-NG', {
     currency: 'NGN',
     style: 'currency',
     currencyDisplay: 'symbol',

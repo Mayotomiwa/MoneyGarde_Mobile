@@ -1,7 +1,8 @@
-import React, { useContext } from "react"
-import uuid from "react-native-uuid"
+import React, { useContext } from "react";
+import uuid from "react-native-uuid";
 
-import useAsyncStorage from "../hooks/useAsyncStorage"
+
+import useAsyncStorage from "../hooks/useAsyncStorage";
 export const UNCATEGORIZED_BUDGET_ID = "Uncategorized"
 
 const BudgetsContext = React.createContext()

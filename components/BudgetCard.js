@@ -1,10 +1,9 @@
-import { Card, Title } from 'react-native-paper';
+import { Button, HStack, Text } from '@react-native-material/core';
 import { StyleSheet, View } from 'react-native';
-import Colors from '../constants/Colors';
-import { Button, Text } from '@react-native-material/core';
-import { currencyFormatter } from '../utils/utils';
-import { HStack } from '@react-native-material/core';
+import { Card, Title } from 'react-native-paper';
 import Progress from '../constants/Bar';
+import Colors from '../constants/Colors';
+import { currencyFormatter } from '../utils/utils';
 
 
 export default function BudgetCard({ name, amount, max, onAddExpenseClick, onViewExpensesClick, hideButtons, Total }) {
@@ -12,12 +11,12 @@ export default function BudgetCard({ name, amount, max, onAddExpenseClick, onVie
         <Card style={styles.container}>
             <Card.Content>
                 <Title>
-                    <HStack spacing={100} style = {{width: '100%'}}>
+                    <HStack spacing={50} style = {{width: '100%'}}>
                         <Text variant='h5' style={styles.name}>{name}</Text>
-                        <View style = {{width: '70%'}}>
+                        <Text style={{width: '60%'}}>
                             <Text variant='h6' style={styles.currency}>{currencyFormatter.format(amount)}</Text>
                             {max && <Text variant='body1' style={styles.currency2}> / {currencyFormatter.format(max)}</Text>}
-                        </View>
+                        </Text>
                     </HStack>
                 </Title>
                 <View style={!Total ? styles.ProgressBar : styles.ProgressBarTotal}>
@@ -38,6 +37,7 @@ const styles = StyleSheet.create({
     container: {
         display: 'flex',
         justifyContent: 'space-between',
+        backgroundColor: Colors.AliceBlue,
         alignItems: 'center',
         alignItems: 'baseline',
         fontWeight: 'normal',
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         color: Colors.garde,
         marginEnd: 10,
-        width: '35%',
+        width: '35%'
     },
     currency: {
         display: 'flex',
@@ -69,8 +69,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     ProgressBarTotal: {
-        paddingTop: 50,
-        width: 350,
+        paddingTop: 30,
+        width: '100%',
         justifyContent: 'center',
     },
     btn: {

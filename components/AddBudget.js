@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { useState, useRef } from 'react';
-import { View, StyleSheet, ScrollView, TextInput } from 'react-native';
-import { Modal, Portal, Provider } from 'react-native-paper';
-import { Button, HStack, IconButton, Text } from '@react-native-material/core';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { Button, HStack, IconButton, Text } from '@react-native-material/core';
+import * as React from 'react';
+import { useRef, useState } from 'react';
+import { ScrollView, StyleSheet, TextInput, View } from 'react-native';
+import { Modal, Portal, Provider } from 'react-native-paper';
 import Colors from '../constants/Colors';
 import { useBudgets } from '../contexts/AppContexts';
 
@@ -17,8 +17,6 @@ export default function AddBudget({ show, handleClose }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        // console.log("name:", name);
-        // console.log("max:", max);
         addBudget({
             name: name,
             max: parseFloat(max),
@@ -26,7 +24,7 @@ export default function AddBudget({ show, handleClose }) {
         handleClose();
     }
 
-    const containerStyle = { backgroundColor: 'white', padding: 20, height: "70%", width: "100%"};
+    const containerStyle = { backgroundColor: 'white', padding: 20, height: "70%", width: "100%" };
 
     const handleNameChangeText = (text) => {
         setName(text);
@@ -39,9 +37,10 @@ export default function AddBudget({ show, handleClose }) {
             <Portal>
                 <Modal visible={show} onDismiss={handleClose} contentContainerStyle={containerStyle}>
                     <ScrollView>
-                        <HStack spacing={180}>
+                        <HStack spacing={'18%'}>
                             <Text variant='h5' color={Colors.garde} style={styles.header}>Add Budget</Text>
                             <IconButton
+                                style={{ width: '30%' }}
                                 icon={props => <Icon style={styles.icon} name="close" {...props} />}
                                 onPress={handleClose}
                             />
@@ -53,7 +52,8 @@ export default function AddBudget({ show, handleClose }) {
                                 ref={nameRef}
                                 onChangeText={handleNameChangeText}
                                 style={[styles.input, styles.inputContainer]}
-                                placeholder="Enter your name"
+                                placeholder="Enter budget name"
+                                maxLength={12}
                             />
                             <Text variant='h6' color={Colors.garde} style={styles.text}>Maximum Spending</Text>
                             <TextInput
@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         marginBottom: 20,
         fontWeight: 'bold',
+        width: '60%',
     },
     inputContainer: {
         height: 55,

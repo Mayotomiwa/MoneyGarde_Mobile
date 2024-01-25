@@ -1,19 +1,18 @@
-import { ScrollView, StyleSheet, View, Image } from 'react-native';
-import { Button, HStack, Text } from '@react-native-material/core';
-import { useState, useEffect } from 'react';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { Button, HStack, Text } from '@react-native-material/core';
+import { useEffect, useState } from 'react';
+import { Alert, Image, ScrollView, StyleSheet, View } from 'react-native';
 import { Portal, Provider } from 'react-native-paper';
 
-import Colors from '../constants/Colors';
 import BudgetCard from '../components/BudgetCard';
-import { useBudgets } from '../contexts/AppContexts';
-import { UNCATEGORIZED_BUDGET_ID } from '../contexts/AppContexts';
+import Colors from '../constants/Colors';
+import { UNCATEGORIZED_BUDGET_ID, useBudgets } from '../contexts/AppContexts';
 
 import AddBudget from '../components/AddBudget';
 import AddExpense from '../components/AddExpense';
-import ViewExpenses from '../components/ViewExpenses';
-import Uncategorized from '../components/Uncategorized';
 import TotalCard from '../components/TotalCard';
+import Uncategorized from '../components/Uncategorized';
+import ViewExpenses from '../components/ViewExpenses';
 
 export default function Home() {
     const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
@@ -21,6 +20,7 @@ export default function Home() {
     const [showAddExpenseModal, setshowAddExpenseModal] = useState(false);
     const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] = useState();
     const [dataloaded, setDataLoaded] = useState(false);
+    const [alertShown, setAlertShown] = useState(false);
     const { budgets, getBudgetExpenses } = useBudgets()
 
     function openAddExpenseModal(budgetId) {
@@ -43,7 +43,7 @@ export default function Home() {
             <ScrollView style={styles.container}>
                 <Text variant='h4' style={styles.name}>MoneyGrade</Text>
                 <Text variant='h6' style={styles.subText}>Hi There <Icon name='hand-wave' style={styles.icon} /></Text>
-                <HStack spacing={20}>
+                <HStack spacing={'5%'}>
                     <Button variant="contained" title="Add Budget" style={styles.btn} onPress={() => setShowAddBudgetModal(true)} />
                     <Button variant='outlined' title="Add Expense" style={styles.btn2} color={Colors.garde} onPress={openAddExpenseModal} />
                 </HStack>
@@ -58,6 +58,17 @@ export default function Home() {
                             const amount = getBudgetExpenses(budget.id).reduce(
                                 (total, expense) => total + expense.amount, 0
                             )
+                            if (amount > budget.max && !alertShown) {
+                                Alert.alert(
+                                    "Over Budget",
+                                    `You have exceeded your budget for ${budget.name}`,
+                                    [
+                                        { text: "OK", onPress: () => console.log("OK Pressed") }
+                                    ]
+                                );
+                                setAlertShown(true);
+                            }
+
                             return (
                                 <BudgetCard
                                     key={budget.id}
@@ -72,8 +83,7 @@ export default function Home() {
                             )
                         })
                     )}
-
-                    <Uncategorized
+                    < Uncategorized
                         onAddExpenseClick={openAddExpenseModal}
                         onViewExpensesClick={() => setViewExpensesModalBudgetId(UNCATEGORIZED_BUDGET_ID)}
                     />
@@ -118,7 +128,6 @@ const styles = StyleSheet.create({
         color: Colors.warning,
     },
     bodyContainer: {
-        display: 'grid',
         gap: 5,
         alignItems: 'flex-start',
     },

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "moneygarde_mobile",
+    "name": "MoneyGarde",
     "slug": "moneygarde_mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,7 +21,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.mayotomiwa.moneygarde_mobile"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,6 +31,12 @@
       "eas": {
         "projectId": "1c3c176c-181f-40a5-a7c1-739f70b158dc"
       }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/1c3c176c-181f-40a5-a7c1-739f70b158dc"
     }
   }
 }

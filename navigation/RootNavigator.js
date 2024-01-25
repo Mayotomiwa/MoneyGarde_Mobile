@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useEffect, useState } from 'react';
 
-import Pager from "../screens/Pager";
-import Home from "../screens/Home";
 import Loader from '../components/Loader';
+import Home from "../screens/Home";
+import Pager from "../screens/Pager";
 
 const Stack = createStackNavigator();
 
@@ -31,7 +31,6 @@ export default function RootNavigator() {
         }
         fetchData();
     }, []);
-
 
     if (isLoading) {
         return (

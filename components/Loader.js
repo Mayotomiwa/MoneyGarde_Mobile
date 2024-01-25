@@ -1,8 +1,10 @@
-import React from 'react'
-import { SafeAreaView, StyleSheet, Image } from 'react-native';
+import React from 'react';
+import { Dimensions, Image, SafeAreaView, StyleSheet } from 'react-native';
 
-import Colors from '../constants/Colors';
 import { ActivityIndicator } from '@react-native-material/core';
+import Colors from '../constants/Colors';
+
+const { width, height } = Dimensions.get('window')
 
 export default function Loader() {
   return (
@@ -20,7 +22,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.garde,
     },
     image: {
-        marginHorizontal: -55,
-        height: '70%'
+      width: width,
+        height: '65%',
     },
 })

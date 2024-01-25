@@ -1,12 +1,10 @@
 import { Button, HStack } from '@react-native-material/core';
-import React, { useState, useRef } from 'react'
-import { StyleSheet, SafeAreaView, Dimensions, View, Image, FlatList, Text } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useRef, useState } from 'react';
+import { Dimensions, FlatList, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
+import Loader from '../components/Loader';
 import Colors from '../constants/Colors';
 import { slides } from '../constants/Slider';
-import Loader from '../components/Loader';
-import { useEffect } from 'react';
 
 const { width, height } = Dimensions.get('window')
 
@@ -93,9 +91,9 @@ export default function Pager({ navigation }) {
                     ))}
                 </View>
                 {currentSlideIndex === slides.length - 1 ? <Btn /> :
-                    <HStack spacing={150}>
-                        <Button variant='outlined' title="Previous" style={styles.btn} color={Colors.white} onPress={goToPrevSlide} />
-                        <Button variant='outlined' title="Next" style={styles.btn} color={Colors.white} onPress={goToNextSlide} />
+                    <HStack spacing={'20%'} style={{marginVertical: 10}}>
+                        <Button variant='outlined' title="Previous" style={styles.btnPrev} color={Colors.white} onPress={goToPrevSlide} />
+                        <Button variant='outlined' title="Next" style={styles.btnNext} color={Colors.white} onPress={goToNextSlide} />
                     </HStack>}
             </View>
         )
@@ -131,10 +129,11 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.garde,
     },
     skip: {
-        marginLeft: 300,
+        marginLeft: '70%',
+        marginTop: '15%',
         bottom: 10,
         marginHorizontal: 10,
-        justifyContent: 'space-evenly',
+        textAlign: 'right',
         padding: 5,
     },
     FlatList: {
@@ -173,7 +172,6 @@ const styles = StyleSheet.create({
     indicatorContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
-        marginTop: 30,
     },
     indicator: {
         height: 2.5,
@@ -186,6 +184,20 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         justifyContent: 'space-evenly',
         marginVertical: 20,
+        padding: 5,
+    },
+    btnPrev: {
+        justifyContent: 'space-evenly',
+        marginVertical: 10,
+        marginHorizontal: 5,
+        width: '38%',
+        padding: 5,
+    },
+    btnNext: {
+        justifyContent: 'space-evenly',
+        marginVertical: 10,
+        marginHorizontal: 5,
+        width: '38%',
         padding: 5,
     },
     btn2: {

@@ -1,12 +1,11 @@
-import * as React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
-import { Modal, Portal, Provider } from 'react-native-paper';
-import { Button, HStack, IconButton, Stack, Text } from '@react-native-material/core';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { Button, HStack, IconButton, Stack, Text } from '@react-native-material/core';
+import * as React from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Modal, Portal, Provider } from 'react-native-paper';
 
 import Colors from '../constants/Colors';
-import { useBudgets } from '../contexts/AppContexts';
-import { UNCATEGORIZED_BUDGET_ID } from '../contexts/AppContexts';
+import { UNCATEGORIZED_BUDGET_ID, useBudgets } from '../contexts/AppContexts';
 import { currencyFormatter } from '../utils/utils';
 
 export default function ViewExpenses({ budgetId, handleClose }) {
@@ -27,7 +26,7 @@ export default function ViewExpenses({ budgetId, handleClose }) {
             <Portal>
                 <Modal visible={budgetId != null} onDismiss={handleClose} contentContainerStyle={containerStyle}>
                     <ScrollView>
-                        <HStack spacing={35} style = {{width: '100%'}}>
+                        <HStack spacing={'5%'} style = {{width: '100%'}}>
                             <Text variant='h5' color={Colors.garde} style={styles.header}>Expense-{budget?.name}</Text>
                             {budgetId !== UNCATEGORIZED_BUDGET_ID && (
                                 <Button variant='outlined' title='Delete' style={{
@@ -35,7 +34,7 @@ export default function ViewExpenses({ budgetId, handleClose }) {
                                     borderColor: Colors.red,
                                     borderWidth: 2,
                                     marginHorizontal: -50,
-                                    width: '30%',
+                                    width: '35%',
                                 }} color={Colors.red} onPress={() => {
                                     deleteBudget(budget)
                                     handleClose()

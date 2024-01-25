@@ -1,14 +1,13 @@
-import * as React from 'react';
-import { useState, useRef } from 'react';
-import { View, StyleSheet, ScrollView, TextInput } from 'react-native';
-import { Modal, Portal, Provider } from 'react-native-paper';
-import { Button, HStack, IconButton, Text } from '@react-native-material/core';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { Button, HStack, IconButton, Text } from '@react-native-material/core';
 import { Picker } from '@react-native-picker/picker';
+import * as React from 'react';
+import { useRef, useState } from 'react';
+import { ScrollView, StyleSheet, TextInput, View } from 'react-native';
+import { Modal, Portal, Provider } from 'react-native-paper';
 
 import Colors from '../constants/Colors';
-import { useBudgets } from '../contexts/AppContexts';
-import { UNCATEGORIZED_BUDGET_ID } from '../contexts/AppContexts';
+import { UNCATEGORIZED_BUDGET_ID, useBudgets } from '../contexts/AppContexts';
 
 export default function AddBudget({ show, handleClose, defaultBudgetId }) {
     const [description, setDescription] = useState('');
@@ -25,9 +24,6 @@ export default function AddBudget({ show, handleClose, defaultBudgetId }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        // console.log("description:", description);
-        // console.log("amount:", amount);
-        // console.log("budgetId:", budgetId);
         addExpense({
             description: description,
             amount: parseFloat(amount),
@@ -53,9 +49,10 @@ export default function AddBudget({ show, handleClose, defaultBudgetId }) {
             <Portal>
                 <Modal visible={show} onDismiss={handleClose} contentContainerStyle={containerStyle}>
                     <ScrollView>
-                        <HStack spacing={180}>
+                        <HStack spacing={'18%'}>
                             <Text variant='h5' color={Colors.garde} style={styles.header}>Add Expense</Text>
                             <IconButton
+                            style={{width: '30%'}}
                                 icon={props => <Icon style={styles.icon} name="close" {...props} />}
                                 onPress={handleClose}
                             />
@@ -86,10 +83,10 @@ export default function AddBudget({ show, handleClose, defaultBudgetId }) {
                                 mode="dropdown"
                                 style={styles.pickerContainer}
                             >
-                                <Picker.Item 
-                                testID={UNCATEGORIZED_BUDGET_ID}
-                                selectedValue ={defaultBudgetId}
-                                label='Uncategorized'
+                                <Picker.Item
+                                    testID={UNCATEGORIZED_BUDGET_ID}
+                                    selectedValue={defaultBudgetId}
+                                    label='Uncategorized'
                                 />
                                 {budgets.map(budget => (
                                     <Picker.Item
@@ -125,7 +122,7 @@ const styles = StyleSheet.create({
     },
     btn: {
         marginHorizontal: 20,
-        marginVertical: 50,
+        marginVertical: 20,
         padding: 8,
         backgroundColor: Colors.garde,
     },
@@ -137,7 +134,8 @@ const styles = StyleSheet.create({
     text: {
         top: 20,
         fontStyle: 'italic',
-        textAlign: 'left'
+        textAlign: 'left',
+        marginBottom: 5,
     },
     budgetText: {
         textAlign: 'left',
@@ -148,21 +146,21 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         marginBottom: 20,
         fontWeight: 'bold',
+        width: '60%',
     },
     inputContainer: {
         height: 55,
         width: '90%',
         backgroundColor: Colors.white,
         flexDirection: 'row',
-        marginVertical: 30,
+        marginVertical: 20,
         padding: 10,
         borderRadius: 8,
         borderWidth: 3,
         borderColor: Colors.garde,
     },
     pickerContainer: {
-        marginVertical: -60,
-        paddingRight: 20,
+        paddingRight: 10,
     },
     input: {
         fontSize: 16,

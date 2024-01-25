@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useState } from "react";
 
-export default function useAsyncStorage(key, defaultValue) {
-  const [value, setValue] = useState(defaultValue);
+export default function useAsyncStorage(key, initValue) {
+  const [value, setValue] = useState(initValue);
 
   useEffect(() => {
     AsyncStorage.getItem(key).then(jsonValue => {
       if (jsonValue != null) {
         setValue(JSON.parse(jsonValue));
-      } else if (typeof defaultValue === "function") {
-        setValue(defaultValue());
+      } else if (typeof initValue === "function") {
+        setValue(initValue());
       }
     });
   }, [key]);
@@ -20,3 +20,4 @@ export default function useAsyncStorage(key, defaultValue) {
 
   return [value, setValue];
 }
+
